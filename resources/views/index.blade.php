@@ -5,12 +5,12 @@
 @endsection
 
 @section('body')
-    <h1 class="text-center">{{__('List of URLs Created for')}}:  {{Auth::user()->name}}</h1> <hr>
+    <h1 class="text-center">{{__('List of URLs created by')}}:  {{Auth::user()->name}}</h1> <hr>
 
     <div class="text-center mt-3 mb-4">
-        <a href="{{url("urls/create")}}">
-            <button class="btn btn-success">{{__('Insert new')}}</button>
-        </a>
+        <a href="{{url("urls/create")}}" class="btn btn-success">{{__('Insert new')}}</a>
+        <a href="{{url("dashboard/")}}" class="btn btn-default">{{__('Back')}}</a>
+        <button class="btn btn-primary" onClick="window.location.reload();">{{__('Refresh Page')}}</button>
     </div>
 
     <div class="col-8 m-auto">
@@ -20,8 +20,8 @@
                 <th scope="col">Id</th>
                 <th scope="col">Url</th>
                 <th scope="col">Status</th>
-                <th scope="col">Response</th>
-                <th scope="col">Action</th>
+                <th scope="col">{{__('Updated at')}}</th>
+                <th scope="col">{{__('Action')}}</th>
             </tr>
             </thead>
             <tbody>
@@ -31,21 +31,14 @@
                     @endphp
                     <tr>
                         <th scope="row">{{$urls->id}}</th>
-                        <td><a href="{{url("urls/$urls->id")}}">{{$urls->description_url}}<a href="{{url("urls/$urls->id")}}"></td>
+                        <td><a href="{{url("urls/$urls->id")}}" title="{{__('URL request information and history')}}">{{$urls->description_url}}</a></td>
                         <td>{{$urls->status_code}}</td>
-                        <td>{{$urls->response}}</td>
+                        <td>{{date("d/m/Y H:i:s", strtotime($urls->updated_at))}}</td>
                         <td>
-                            {{-- <a href="{{url("urls/$urls->id")}}">
-                                <button class="btn btn-dark">Visualizar</button>
-                            </a> --}}
-
                             <a href="{{url("urls/$urls->id/edit")}}">
                                 <button class="btn btn-primary">{{__('Edit')}}</button>
                             </a>
 
-                            {{-- <a href="">
-                                <button class="btn btn-danger">Deletar</button>
-                            </a> --}}
                             <form name="formDel" id="formDel" method="post" action="{{url("urls/$urls->id")}}">
                                 @csrf
                                 @method('DELETE')
@@ -56,7 +49,5 @@
                 @endforeach
             </tbody>
         </table>
-
-        {{-- {{ $url->links() }} --}}
     </div>
 @endsection

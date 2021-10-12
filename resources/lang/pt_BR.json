@@ -79,9 +79,16 @@
     "Edit": "Editar",
     "Delete": "Deletar",
     "Insert": "Inserir",
-    "Insert new": "Inserir novo",
+    "Insert new": "Inserir nova",
     "Select User": "Selecione o Usuário",
-    "List of URLs Created for": "Lista de URLs criados para",
+    "List of URLs created by": "Lista de URLs criados por",
     "URL form": "Formulário de URL",
-    "URL view": "Visualizar URL"
+    "URL view": "Visualizar URL",
+    "Updated at": "Atualizado em",
+    "click here to list your URLs": "clique aqui para listar suas URLs",
+    "click here to enter your URLs": "clique aqui para inserir suas URLs",
+    "User": "Usuário",
+    "Response": "Resposta",
+    "Action": "Ação",
+    "URL request information and history": "Informações e histórico de solicitação de URL"
 }

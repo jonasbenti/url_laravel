@@ -25,16 +25,6 @@
         <form name="formIns" id="formIns" method="post" action="{{url('urls')}}">
             @csrf
             <input class="form-control" type="text" name="url" id="url" placeholder="Url:" value="{{$url->description_url ?? ''}}" required><br>
-            <select class="form-control" name="id_user" id="id_user" required>
-                <option value="">{{__('Select User')}}</option>
-                @foreach($users as $user)
-                    @if(($url->relUsers->id ?? 0) == $user->id)
-                        <option value="{{$user->id}}" selected>{{$user->name}}</option>
-                    @else
-                        <option value="{{$user->id}}">{{$user->name}}</option>
-                    @endif
-                @endforeach
-            </select><br>
             <input class="btn btn-primary" type="submit" value="@if(isset($url)){{__('Edit')}} @else {{__('Insert')}} @endif">
             <a href="{{ url()->previous() }}" class="btn btn-default">{{__('Back')}}</a>
         </form>

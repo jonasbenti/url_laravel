@@ -16,19 +16,8 @@ use App\Http\Controllers\UrlRequestController;
 |
 */
 
-// Route::get('/', function () {
-//     return view('welcome');
-// });
-// Route::resource('/index', UrlController::class);
 Route::resource('/urls', UrlController::class)->middleware(['auth']);
 Route::resource('/url_request', UrlRequestController::class);
-
-// Route::get('/teste', function () {
-//     $response = Http::get('https://viacep.com.br/ws/89306076/json/');
-
-//     dd($response->json(), $response->status());
-//     dd($response->status());
-// })->middleware(['auth']);
 
 Route::get('/dashboard', function () {
     return view('dashboard');

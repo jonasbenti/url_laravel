@@ -5,25 +5,30 @@ namespace App\Http\Controllers;
 use App\Models\User;
 use App\Models\ModelUrl;
 use App\Http\Requests\UrlRequest;
+use App\Models\ModelUrlResponse;
+use Illuminate\Support\Facades\Auth;
 
 class UrlController extends Controller
 {
     public function index()
     {
-        // $url = ModelUrl::paginate(15);
-        $url = ModelUrl::where('id_user', '=', '1')->get();
+        $url = User::find(Auth::user()->id)->relUrls;
+
         return view('index', compact('url'));
     }
 
     public function show($id)
     {
         $url = ModelUrl::find($id);
-        return view('show', compact('url'));
+        $urlResponse = ModelUrlResponse::find($id)->relUrlresponse;
+
+        return view('show', compact('url', 'urlResponse'));
     }
 
     public function create()
     {
         $users = User::all();
+
         return view('create', compact('users'));
     }
 
@@ -31,8 +36,9 @@ class UrlController extends Controller
     {
         $cad = ModelUrl::create([
             'description_url' => $request->url,
-            'id_user' => $request->id_user
+            'id_user' => Auth::user()->id
         ]);
+
         if($cad){
             return redirect('urls');
         }
@@ -42,6 +48,7 @@ class UrlController extends Controller
     {
         $url = ModelUrl::find($id);
         $users = User::all();
+
         return view('create', compact('url','users'));
     }
 
@@ -51,6 +58,7 @@ class UrlController extends Controller
             'description_url' => $request->url,
             'id_user' => $request->id_user
         ]);
+
         if($edit){
             return redirect('urls');
         }
@@ -59,6 +67,7 @@ class UrlController extends Controller
     public function destroy($id)
     {
         $del = ModelUrl::destroy($id);
+
         if($del){
             return redirect('urls');
         }
